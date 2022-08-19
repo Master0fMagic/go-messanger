@@ -1,0 +1,8 @@
+create table accounts(
+id serial primary key,
+username varchar(64) not null,
+email text,
+phone text,
+registration_date text,
+"password" text
+);
