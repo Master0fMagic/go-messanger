@@ -1,6 +1,7 @@
 package postgres
 
 import (
+	"context"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
@@ -22,15 +23,15 @@ func New(cfg *config.PostgresConfig) (*Client, error) {
 	return &Client{db}, nil
 }
 
-func (c *Client) Update(query string, params ...any) error {
-	_, err := c.db.Exec(query, params)
+func (c *Client) Update(ctx context.Context, query string, params ...any) error {
+	_, err := c.db.ExecContext(ctx, query, params)
 	return err
 }
 
-func (c *Client) Get(dest any, query string, params ...any) error {
-	return c.db.Get(dest, query, params)
+func (c *Client) GetOne(ctx context.Context, dest any, query string, params ...any) error {
+	return c.db.GetContext(ctx, dest, query, params)
 }
 
-func (c *Client) Select(dest any, query string, params ...any) error {
-	return c.db.Select(dest, query, params)
+func (c *Client) Select(ctx context.Context, dest any, query string, params ...any) error {
+	return c.db.SelectContext(ctx, dest, query, params)
 }
