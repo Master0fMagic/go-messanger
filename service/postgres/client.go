@@ -15,7 +15,7 @@ type Client struct {
 }
 
 func New(cfg *config.PostgresConfig) (*Client, error) {
-	db, err := sqlx.Connect(driverName, cfg.Options)
+	db, err := sqlx.Connect(driverName, cfg.Opts)
 
 	if err != nil {
 		return nil, errors.Wrap(err, "Cant connect to DB")

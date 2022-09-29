@@ -11,7 +11,7 @@ type (
 	}
 
 	PostgresConfig struct {
-		Options string `env:"OPTS,required,notEmpty" env-default:""`
+		Opts string `env:"OPTS,required,notEmpty" env-default:""`
 	}
 )
 

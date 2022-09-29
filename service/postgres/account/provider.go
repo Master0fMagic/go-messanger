@@ -50,7 +50,7 @@ func (c *Provider) validateNewUserFieldIsUnique(ctx context.Context, user *dto.U
 	}
 	dbField := field.Tag.Get("db")
 
-	isExist, err := c.IsFieldExist(ctx, dbField, value)
+	isExist, err := c.isFieldExist(ctx, dbField, value)
 	if err != nil {
 		return err
 	}
@@ -61,7 +61,7 @@ func (c *Provider) validateNewUserFieldIsUnique(ctx context.Context, user *dto.U
 	return nil
 }
 
-func (c *Provider) IsFieldExist(ctx context.Context, field, value string) (bool, error) {
+func (c *Provider) isFieldExist(ctx context.Context, field, value string) (bool, error) {
 	var resp bool
 	err := c.db.GetOne(ctx, &resp, isFieldUniqueQuery, field, value)
 	if err != nil {
