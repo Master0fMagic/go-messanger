@@ -14,7 +14,7 @@ type Client struct {
 	db *sqlx.DB
 }
 
-func New(cfg *config.PostgresConfig) (*Client, error) {
+func New(cfg config.PostgresConfig) (*Client, error) {
 	db, err := sqlx.Connect(driverName, cfg.Opts)
 
 	if err != nil {
@@ -34,4 +34,8 @@ func (c *Client) GetOne(ctx context.Context, dest any, query string, params ...a
 
 func (c *Client) Select(ctx context.Context, dest any, query string, params ...any) error {
 	return c.db.SelectContext(ctx, dest, query, params)
+}
+
+func (c *Client) Close() error {
+	return c.db.Close()
 }

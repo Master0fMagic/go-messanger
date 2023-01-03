@@ -1,4 +1,4 @@
-package account
+package provider
 
 const (
 	registerNewAccountQuery = `insert into accounts(username, email, "password", registration_date)
